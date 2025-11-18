@@ -8,14 +8,19 @@ hostname = "google.com"
 # you can see how many routers there are 
 # from you to your destination.
 
-upper_bound = 2
+upper_bound = 100
 
-for i in range(1, upper_bound):
+#for i in range(1, upper_bound):
+i = 1
+while i < upper_bound:
     pkt = IP(dst=hostname, ttl=i) / UDP(dport=33434)
-    reply = sr1(pkt, verbose=0)
+    reply = sr1(pkt, verbose=0, timeout=2)
     if reply == None:
-        break
+        print("No reply")
     elif reply.type == 3:
         print("Done", reply.src)
+        print(i)
+        break
     else:
         print("%d hops away: " % i, reply.src)
+    i = i + 1

@@ -18,4 +18,4 @@ def print_pkt(pkt):
 #   (2) Capture packets that come from or go to the subnet
 #       10.9.0.0/24
 
-pkt = sniff(iface='', filter='', prn=print_pkt)        
+pkt = sniff(iface='br-6d47107d974a', filter='net 10.9.0/24', prn=print_pkt)        
